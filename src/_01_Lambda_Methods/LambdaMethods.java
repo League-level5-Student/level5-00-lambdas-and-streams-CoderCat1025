@@ -12,14 +12,24 @@ public class LambdaMethods {
 			}
 		}, "repeat");
 		
-		//2. Call the printCustonMessage method using a lambda so that the String prints backwards.
-		
-		//3. Call the printCustonMessage method using a lambda so that the String prints with a mix between upper an lower case characters.
-		
-		//4. Call the printCustonMessage method using a lambda so that the String prints with a period in between each character.
-		
-		//5. Call the printCustonMessage method using a lambda so that the String prints without any vowels.
-	
+		//2. Call the printCustomMessage method using a lambda so that the String prints backwards.
+		printCustomMessage((s) -> {
+			StringBuilder build = new StringBuilder(s);
+			build.reverse();
+			System.out.println(build.toString());
+		}, "backwards");
+		//3. Call the printCustomMessage method using a lambda so that the String prints with a mix between upper an lower case characters.
+		printCustomMessage((s) -> {
+			
+		}, "silly");
+		//4. Call the printCustomMessage method using a lambda so that the String prints with a period in between each character.
+		printCustomMessage((s) -> {
+			
+		}, "periods");
+		//5. Call the printCustomMessage method using a lambda so that the String prints without any vowels.
+		printCustomMessage((s) -> {
+			
+		}, "no vowels");
 	}
 	
 	public static void printCustomMessage(SpecialPrinter sp, String value) {
