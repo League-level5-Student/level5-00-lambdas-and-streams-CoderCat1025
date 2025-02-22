@@ -27,8 +27,11 @@ public class StreamSorter {
     }
 
     List<String> sortList(List<String> list) {
-    	list = Arrays.stream(list).sorted((str1, str2) -> str1.compareTo(str2)).collect(Collectors.toList());
-        return null;
+    	
+    	list = list.stream() 
+    			.sorted((str1, str2) -> str1.compareTo(str2))
+    			.collect(Collectors.toList());
+        return list;
     }
     
     // =================== DO NOT MODIFY THE CODE BELOW ======================
