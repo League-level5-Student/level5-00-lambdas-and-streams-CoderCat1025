@@ -46,7 +46,7 @@ public class Minesweeper extends PApplet {
 
 	int cellWidth = 40;             // in pixels
 	int headerHeight = cellWidth;   // height of game info header
-	int numOfMines = 15;            // total number of mines in the game
+	int numOfMines = 20;            // total number of mines in the game
 	int minesFlagged = 0;           // number of mines flagged
 	int cellColor = 0xBFC0BB;       // color of unrevealed cell
 
@@ -82,9 +82,10 @@ public class Minesweeper extends PApplet {
 	 */
 
 	boolean checkWin() {
-		cells.stream().noneMatch(t->t.mine==true);
+		cells.stream().filter(e->e.mine==false).noneMatch(t->t.revealed==false);
 		return false;
 	}
+	//FIX THIS TOO, it doesn't seem to be working
 
 	/*
 	 *  cell was clicked and this method needs to:
@@ -104,11 +105,10 @@ public class Minesweeper extends PApplet {
 	 */
 
 	void revealCell(Cell cell) {
-		if (cell.mine==false) {
+		if (cell.mine==false && cell.revealed==false) {
 			cell.revealed=true;
 			if (cell.minesAround==0) {
 				getNeighbors(cell).stream().forEach(t->revealCell(t));
-				//this causes an error, fix later.
 			}
 		}
 	}
@@ -126,7 +126,9 @@ public class Minesweeper extends PApplet {
 	 */
 
 	void setNumberOfSurroundingMines() {
-		cells.stream().forEach(t->getNeighbors(t).stream().filter(e->e.mine==true).mapToInt(e->1).sum());
+		cells.stream().forEach(t-> t.minesAround=getNeighbors(t).stream()
+				.filter(e->e.mine==true)
+				.mapToInt(e->1).sum());
 	}
 
 	@Override
